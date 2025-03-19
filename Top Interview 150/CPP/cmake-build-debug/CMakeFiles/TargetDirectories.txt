@@ -1,3 +1,0 @@
-C:/Users/User/OneDrive - post.bgu.ac.il/Desktop/things/GIT/LeetCode/Top Interview 150/CPP/cmake-build-debug/CMakeFiles/CPP.dir
-C:/Users/User/OneDrive - post.bgu.ac.il/Desktop/things/GIT/LeetCode/Top Interview 150/CPP/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/User/OneDrive - post.bgu.ac.il/Desktop/things/GIT/LeetCode/Top Interview 150/CPP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
