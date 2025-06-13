@@ -1,0 +1,96 @@
+class MyCircularDeque(object):
+
+    def __init__(self, k):
+        """
+        :type k: int
+        """
+        self.queue = [0]*k
+        self.k = k
+        self.l = 0
+        self.r = 0
+        self.size = 0
+
+    def insertFront(self, value):
+        """
+        :type value: int
+        :rtype: bool
+        """
+        if self.isFull():
+            return False
+        self.queue[self.r] = value
+        self.r = (self.r + 1) % self.k
+        self.size += 1
+        return True        
+
+    def insertLast(self, value):
+        """
+        :type value: int
+        :rtype: bool
+        """
+        if self.isFull():
+            return False
+        self.l = (self.l - 1) % self.k
+        self.queue[self.l] = value
+        self.size += 1
+        return True
+
+    def deleteFront(self):
+        """
+        :rtype: bool
+        """
+        if self.isEmpty():
+            return False
+        self.r = (self.r - 1) % self.k
+        self.size -= 1
+        return True
+
+    def deleteLast(self):
+        """
+        :rtype: bool
+        """
+        if self.isEmpty():
+            return False
+        self.l = (self.l + 1) % self.k
+        self.size -= 1
+        return True
+
+    def getFront(self):
+        """
+        :rtype: int
+        """
+        if self.isEmpty():
+            return -1
+        return self.queue[(self.r - 1) % self.k]
+
+    def getRear(self):
+        """
+        :rtype: int
+        """
+        if self.isEmpty():
+            return -1
+        return self.queue[self.l]
+
+    def isEmpty(self):
+        """
+        :rtype: bool
+        """
+        return self.size == 0
+
+    def isFull(self):
+        """
+        :rtype: bool
+        """
+        return self.size == self.k
+        
+
+
+# Your MyCircularDeque object will be instantiated and called as such:
+# obj = MyCircularDeque(k)
+# param_1 = obj.insertFront(value)
+# param_2 = obj.insertLast(value)
+# param_3 = obj.deleteFront()
+# param_4 = obj.deleteLast()
+# param_5 = obj.getFront()
+# param_6 = obj.getRear()
+# param_7 = obj.isEmpty()
+# param_8 = obj.isFull()
