@@ -1,0 +1,58 @@
+class Node(object):
+    def __init__(self):
+        self.dic = {}
+        self.end = False
+
+class Trie(object):
+
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word):
+        """
+        :type word: str
+        :rtype: None
+        """
+        node = self.root
+        for i in range(len(word)):
+            if word[i] not in node.dic:
+                node.dic[word[i]] = Node()
+            node = node.dic[word[i]]
+            if i == len(word) - 1:
+                node.end = True
+        
+    def search(self, word):
+        """
+        :type word: str
+        :rtype: bool
+        """
+        node = self.root
+        for i in range(len(word)):
+            if word[i] in node.dic:
+                node = node.dic[word[i]]
+            else:
+                return False
+            if i == len(word) - 1 and node.end == True:
+                return True
+        return False
+                
+
+    def startsWith(self, prefix):
+        """
+        :type prefix: str
+        :rtype: bool
+        """
+        node = self.root
+        for i in range(len(prefix)):
+            if prefix[i] in node.dic:
+                node = node.dic[prefix[i]]
+            else:
+                return False
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
