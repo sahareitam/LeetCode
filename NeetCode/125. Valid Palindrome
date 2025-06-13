@@ -1,0 +1,11 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        arr = []
+        for c in s:
+            if c.isalpha() or c.isdigit():
+                arr.append(c.lower())
+        return arr == arr[::-1]
