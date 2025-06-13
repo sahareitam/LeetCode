@@ -1,0 +1,81 @@
+class Node(object):
+    def __init__(self,val = None,key = None):
+        self.val = val
+        self.key = key
+        self.next = None
+        self.prev = None
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.count = 0
+        self.dic = {}
+        self.head = Node()
+        self.tail = Node()
+
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    
+    def remove_node(self,node):
+        if self.count >= 1:
+            nxt = node.next
+            prev = node.prev
+            prev.next = nxt
+            nxt.prev = prev
+            node.next = None
+            node.prev = None
+            self.count -= 1
+            
+    
+    def add_to_tail(self,node):
+        if self.count == self.capacity and self.count >= 1:
+            self.remove_node(self.head.next)
+        prev = self.tail.prev
+        prev.next = node
+        node.prev = prev
+        node.next = self.tail
+        self.tail.prev = node
+        self.count += 1
+
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key in self.dic:
+            self.remove_node(self.dic[key])
+            self.add_to_tail(self.dic[key])
+            return self.dic[key].val
+        return -1 
+        
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: None
+        """
+        if key not in self.dic:
+            if self.count == self.capacity and self.count >= 1:
+                del self.dic[self.head.next.key]
+                self.remove_node(self.head.next)
+            node = Node(value,key)
+            self.dic[key] = node
+            self.add_to_tail(node)
+        else:
+            self.remove_node(self.dic[key])
+            self.dic[key] = Node(value,key)
+            self.add_to_tail(self.dic[key])
+
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
