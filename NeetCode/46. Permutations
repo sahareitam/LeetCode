@@ -1,0 +1,24 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+  
+
+        permu = [[nums[0]]]
+
+        for i in range(1,len(nums)):
+            new = []
+            for per in permu:
+                for j in range(len(per)+1):
+                    copy = per[:j] + [nums[i]] + per[j:]
+                    new.append(copy)
+            permu = new
+        return permu
+
+                
+                
+                    
+
+
