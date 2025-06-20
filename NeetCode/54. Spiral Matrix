@@ -1,0 +1,58 @@
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        r = 0
+        c = 0
+        rows = len(matrix)
+        cols = len(matrix[0])
+        res = []
+        limit_r = 0
+        limit_c = 0
+        count = len(matrix) * len(matrix[0])
+
+        while count > 0:
+            print(res)
+            while limit_r <= r < rows and limit_c <= c < cols:
+                res.append(matrix[r][c])
+                count -= 1
+                if c + 1 == cols:
+                    limit_r += 1
+                    r+=1
+                    break
+                else:
+                    c += 1
+
+            while limit_r <= r < rows and limit_c <= c < cols:
+                res.append(matrix[r][c])
+                count -= 1
+                if r + 1 == rows:
+                    cols -= 1
+                    c-=1
+                    break
+                else:
+                    r += 1
+            
+            while limit_r <= r < rows and limit_c <= c < cols:
+                res.append(matrix[r][c])
+                count -= 1
+                if c == limit_c:
+                    rows -= 1
+                    r -= 1
+                    break
+                else:
+                    c -= 1
+            
+            while limit_r <= r < rows and limit_c <= c < cols:
+                res.append(matrix[r][c])
+                count -= 1
+                if r == limit_r:
+                    limit_c += 1
+                    c+=1
+                    break
+                else:
+                    r -= 1
+        return res
+            
