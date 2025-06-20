@@ -1,0 +1,22 @@
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        self.memo = {}
+        def dfs(string):
+            if string in self.memo:
+                return self.memo[string]
+            if len(string) == 0:
+                return True
+            
+            for word in wordDict:
+                if len(word) <= len(string) and word == string[:len(word)]:
+                    if dfs(string[len(word):]):
+                        self.memo[string] = True
+            if string not in self.memo:
+                self.memo[string] = False
+            return self.memo[string]
+        return dfs(s)
